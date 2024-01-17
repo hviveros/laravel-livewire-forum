@@ -21,5 +21,10 @@ class DatabaseSeeder extends Seeder
         ]);        
         \App\Models\User::factory(9)->create();
         \App\Models\Category::factory(10)->create();
+
+        // Método de Laravel para hacer relaciones automáticas, en este caso Thread x Category
+        \App\Models\Category::factory(10)
+            ->hasThreads(30)
+            ->create();
     }
 }
