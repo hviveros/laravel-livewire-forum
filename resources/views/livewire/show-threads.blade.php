@@ -22,27 +22,47 @@
     </div>
     <div class="w-full">
         {{-- formulario --}}
+        <form class="mb-4">
+            <input type="text" placeholder="// ..."
+                class="bg-slate-800 border-0 rounded-md w-1/3 p-3 text-white/60 text-xs"
+                wire:model.live="search"
+            >
+        </form>
 
         @foreach($threads as $thread)
         <div class="rounded-md bg-gradient-to-r from-slate-800 to slate-900 hover:to-slate-800 mb-4">
             <div class="p-4 flex gap-4">
-                <div>Imagen</div>
+                <div>
+                    {{-- Se trabaja con la pregunta, que pertenece a un usuario y a este se le aplica el método avatar() --}}
+                    <img src="{{ $thread->user->avatar() }}" alt="{{ $thread->user->name }}" class="rounded-md">
+                </div>
                 <div class="w-full">
                     <h2 class="mb-4 flex items-start justify-between">
                         <a href="" class="text-xl font-semibold text-white/90">
                             {{ $thread->title }}
                         </a>
-                        <span class="rounded-full text-xs py-2 px-4 capitalize" style="color:#00aced; border:1px solid #00aced">
-                            Categoría
+                        <span class="rounded-full text-xs py-2 px-4 capitalize" style="color:{{ $thread->category->color }}; border:1px solid {{ $thread->category->color }}">
+                            {{ $thread->category->name }}
                         </span>
                     </h2>
                     <p class="flex items-center justify-between w-full text-xs">
                         <span class="text-blue-600 font-semibold">
-                            Usuario
+                            {{ $thread->user->name }}
                             {{-- Nótese los métodos que se pueden aplicar en la vista --}}
                             <span class="text-white/90">{{ $thread->created_at->diffForHumans(); }}</span>
                         </span>
-                        <span class="text-slate-700">Respuestas y botón</span>
+                        <span class="text-slate-700 flex items-center gap-1">
+                            
+                            <svg data-slot="icon" class="h-4" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 0 1 1.037-.443 48.282 48.282 0 0 0 5.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"></path>
+                              </svg>
+
+                            {{ $thread->replies_count; }}
+                            {{-- Hacemos una operación ternaria para ver si colocamos 's' al final de la palabra 'Respuesta' --}}
+                            Respuesta{{ $thread->replies_count !== 1 ? 's' : '' }}
+                            |
+                            <a href="" class="hover:text-white/90">Editar</a>
+                        </span>
                     </p>
                 </div>
             </div>

@@ -42,4 +42,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // Básicamente aquí podemos crear distintas funciones, que pueden ser llamadas en el componente
+    // En este caso, esta función servirá para traer un ícono aleatorio de un sitio web
+    public function avatar()
+    {
+        return 'https://gravatar.com/avatar/' . md5($this->email) . '?s=50';
+    }
 }
