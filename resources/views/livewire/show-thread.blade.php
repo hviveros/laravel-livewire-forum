@@ -1,4 +1,4 @@
-<div class="max-w-4xl mx-auto px-4 sm:px6 lg:px-8 flex gap-10 py-12">
+<div class="max-w-4xl mx-auto px-4 sm:px6 lg:px-8 py-12">
 
     <div class="rounded-md bg-gradient-to-r from-slate-800 to slate-900 mb-4">
         <div class="p-4 flex gap-4">
@@ -30,6 +30,12 @@
     {{-- respuestas --}}
 
     {{-- formulario --}}
+    <form wire:submit.prevent="postReply">
+        <input type="text" placeholder="Escribe una respuesta"
+            class="bg-slate-800 border-0 rounded-md w-full p-3 text-white/60 text-xs"
+            wire:model="body"
+        >
+    </form>
 
     {{-- Close your eyes. Count to one. That is how long forever feels. --}}
 </div>
