@@ -26,8 +26,11 @@ class ShowThread extends Component
         $this->body = '';
     }
 
+    // Aquí se hizo fue consultar a las respuestas de esta pregunta
     public function render()
     {
-        return view('livewire.show-thread');
+        return view('livewire.show-thread', [
+            'replies' => $this->thread->replies()->get()
+        ]);
     }
 }
