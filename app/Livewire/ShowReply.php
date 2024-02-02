@@ -39,12 +39,19 @@ class ShowReply extends Component
 
     public function updatedIsEditing()
     {
+        // Política de privacidad
+        $this->authorize('update', $this->reply);
+
         $this->is_creating = false;
         $this->body = $this->reply->body;
     }
 
     public function updateReply()
     {
+        // Política de autorización
+        // update es el nombre del método que está en Policies / ReplyPolicy
+        $this->authorize('update', $this->reply);
+
         // validate
         $this->validate(['body' => 'required']);
 

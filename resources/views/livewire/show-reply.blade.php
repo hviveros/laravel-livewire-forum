@@ -39,7 +39,11 @@
                     {{-- Cuando se haga clic, no recargar la página (prevent), y trabajar con la variable is_creating en $toggle --}}
                     <a href="#" wire:click.prevent="$toggle('is_creating')" class="hover:text-white">Responder</a>
                     @endif
-                    <a href="#" wire:click.prevent="$toggle('is_editing')" class="hover:text-white">Editar</a>
+
+                    {{-- Política de Autorización --}}
+                    @can('update', $reply)
+                    <a href="#" wire:click.prevent="$toggle('is_editing')" class="hover:text-white">Editar</a>                        
+                    @endcan
                 </p>
             </div>
         </div>
