@@ -61,7 +61,7 @@
                             {{-- Hacemos una operación ternaria para ver si colocamos 's' al final de la palabra 'Respuesta' --}}
                             Respuesta{{ $thread->replies_count !== 1 ? 's' : '' }}
                             |
-                            <a href="" class="hover:text-white/90">Editar</a>
+                            <a href="{{ route('threads.edit', $thread) }}" class="hover:text-white/90">Editar</a>
                         </span>
                     </p>
                 </div>
