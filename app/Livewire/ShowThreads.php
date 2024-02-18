@@ -35,7 +35,8 @@ class ShowThreads extends Component
         if ($this->category) {
             $threads->where('category_id', $this->category);
         }
-
+        // Optimización de consultas
+        $threads->with('user', 'category');
         $threads->withCount('replies');
         $threads->latest();
 

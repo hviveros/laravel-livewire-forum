@@ -1,7 +1,7 @@
 <div class="max-w-7xl mx-auto px-4 sm:px6 lg:px-8 flex gap-10 py-12">
 
     <div class="w-64">
-        <a href="" class="block w-full py-4 mb-10 bg-gradient-to-r from-blue-600 to-blue-700 hover:to-blue-600 text-white/90 font-bold text-xs text-center rounded-md">Preguntar</a>
+        <a href="{{ route('threads.create') }}" class="block w-full py-4 mb-10 bg-gradient-to-r from-blue-600 to-blue-700 hover:to-blue-600 text-white/90 font-bold text-xs text-center rounded-md">Preguntar</a>
         <ul>
             @foreach($categories as $category)
             <li class="mb-2">
@@ -60,8 +60,12 @@
                             {{ $thread->replies_count; }}
                             {{-- Hacemos una operación ternaria para ver si colocamos 's' al final de la palabra 'Respuesta' --}}
                             Respuesta{{ $thread->replies_count !== 1 ? 's' : '' }}
+                            
+                            {{-- Política de Autorización --}}
+                            @can('update', $thread)
                             |
-                            <a href="{{ route('threads.edit', $thread) }}" class="hover:text-white/90">Editar</a>
+                                <a href="{{ route('threads.edit', $thread) }}" class="hover:text-white/90">Editar</a>
+                            @endcan
                         </span>
                     </p>
                 </div>
